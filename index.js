@@ -157,12 +157,14 @@ restService.post("/echo", function(req, res) {
         }
     }
 
-    //llama a la primera consulta
+    //llama a la consulta que da la lectura
     Consulta1(idestacion);
-    //llama a la segunda consulta
+    //llama a la consulta que da el id de registro
     Consulta2(id_lectura,idsensor);
+    //llama a la consulta que da el valor
+    Consulta3(id_registro);
 
-    respuesta = "El ultimo registro de "+id_registro;
+    respuesta = "El ultimo registro de "+valor;
 
   }
   return res.json({
@@ -194,6 +196,22 @@ function Consulta2(id_lec, id_sens){
              throw error;
           }else{
             id_registro = result[0].id;
+          }
+       }
+  );
+
+}
+
+
+function Consulta3(id_reg){
+
+  var Sentencia = "SELECT value FROM registers WHERE id = "+id_reg;
+
+  connection.query(Sentencia, function(error, result){
+          if(error){
+             throw error;
+          }else{
+            valor = result[0].value;
           }
        }
   );
