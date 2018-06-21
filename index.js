@@ -188,24 +188,24 @@ function Consulta2(id_sens){
 
   var Sentencia = "SELECT id(MAX) AS id FROM registers WHERE lecture_id = "+id_lectura+" AND sensor_id = "+id_sens;
 
-  var id = "";
+  var idMaximo = "1";
 
   connection.query(Sentencia, function(error, result){
           if(error){
              throw error;
           }else{
-            id = result[0].id;
+            idMaximo = result[0].id;
           }
        }
   );
 
-  var Sentencia2 = "SELECT value FROM registers WHERE id = "+id;
+  var Sentencia2 = "SELECT value FROM registers WHERE id = "+idMaximo;
 
   connection.query(Sentencia2, function(error, result){
           if(error){
              throw error;
           }else{
-            valor = result[0].id;
+            valor = result[0].value;
           }
        }
   );
