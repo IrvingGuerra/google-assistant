@@ -173,11 +173,16 @@ restService.post("/echo", function(req, res) {
 
     var id_lectura = "";
 
-    ConsultaLectura(idestacion, function(result) {
+    ConsultaLectura("1", function(result) {
+
         id_lectura = result;
+        
+        respuesta = Sensores + " en la " + Estacion + " es de "+ id_lectura + " " + tipoValor;
+        
     });
 
-    respuesta = Sensores + " en la " + Estacion + " es de "+ id_lectura + " " + tipoValor;
+
+    
 
   }
   return res.json({
@@ -215,7 +220,6 @@ function ConsultaLectura(id_estacion, resultado) {
     );
 
     connection.end();
-
 }
 
 
