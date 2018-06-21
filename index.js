@@ -172,24 +172,34 @@ restService.post("/echo", function(req, res) {
     }
 
     var id_lectura = "";
+    var valor_lectura = "";
 
-    ConsultaLectura("1", function(result) {
+    ConsultaLectura(idestacion, function(result) {
 
         id_lectura = result;
-        
-        respuesta = Sensores + " en la " + Estacion + " es de "+ id_lectura + " " + tipoValor;
 
-        return res.json({
-          fulfillmentText: respuesta,
-          source: "webhook-echo-sample"
+        ConsultaValor(id_lectura,idsensor, function(result) {
+
+          valor_lectura = result;
+
+          respuesta = Sensores + " en la " + Estacion + " es de "+ valor_lectura + " " + tipoValor;
+
+          return res.json({
+            fulfillmentText: respuesta,
+            source: "webhook-echo-sample"
+          });
+
         });
 
     });
 
-
-
   }
-
+/*
+  return res.json({
+    fulfillmentText: respuesta,
+    source: "webhook-echo-sample"
+  });
+*/
 });
 
 
@@ -215,6 +225,39 @@ function ConsultaLectura(id_estacion, resultado) {
                throw error;
             }else{
               returnValue = result[0].id;
+              resultado(returnValue);
+            }
+         }
+    );
+
+    connection.end();
+}
+
+
+function ConsultaValor(id_lectura,id_sensor, resultado) {
+    
+
+    var connection = mysql.createConnection({
+      host: 'emecdrive.com',
+      user: 'emecdriv',
+      password: 'oI32k6cw5Q',
+      database: 'emecdriv_emec'
+    });
+
+    connection.connect(function(err) {
+      if (err) throw err;
+      console.log("Connected!");
+    });
+
+    var returnValue = "Valor";
+
+    var Sentencia = "SELECT MAX(id) AS id,value FROM registers WHERE lecture_id = '"+id_lectura+"' AND sensor_id = '"+id_sensor+"'";
+
+    connection.query(Sentencia, function(error, result){
+            if(error){
+               throw error;
+            }else{
+              returnValue = result[0].value;
               resultado(returnValue);
             }
          }
