@@ -6,8 +6,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const restService = express();
 const mysql = require('mysql');
-var valor_registro = "";
-var tipoValor = "";
 
 restService.use(
   bodyParser.urlencoded({
@@ -36,6 +34,7 @@ restService.post("/echo", function(req, res) {
   var respuesta = "";
   var idsensor = "";
   var idestacion = "";
+  var tipoValor = "";
 
   if (Sensores == "vacio" || Estacion == "vacio") {
     respuesta = "Disculpe, necesito que indique el sensor y la estacion."
@@ -171,8 +170,7 @@ restService.post("/echo", function(req, res) {
         }
     }
 
-    //llama a la consulta que da la lectura
-    Consulta1(idestacion,idsensor);
+    var valor_registro = Consulta1(idestacion,idsensor);
 
     respuesta = Sensores + " en la " + Estacion + " es de "+ valor_registro + " " + tipoValor;
 
@@ -201,6 +199,7 @@ function Consulta1(id_est,id_sens){
 
   var id_lectura = "";
   var id_registro = "";
+  var valor_registro = "";
 
   var Sentencia = "SELECT MAX(id) AS id FROM lectures WHERE station_id = "+id_est;
 
@@ -228,6 +227,7 @@ function Consulta1(id_est,id_sens){
 
   connection.end();
 
+  return valor_registro;
 }
 
 
