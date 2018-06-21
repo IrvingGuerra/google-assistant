@@ -172,8 +172,8 @@ restService.post("/echo", function(req, res) {
         }
     }
 
-    consula.then(function(returnValue) {
-        valor_registro = returnValue;
+    Consulta1(idestacion, idsensor, function(response) {
+        valor_registro = response;    
     });
 
     respuesta = Sensores + " en la " + Estacion + " es de "+ valor_registro + " " + tipoValor;
@@ -185,7 +185,8 @@ restService.post("/echo", function(req, res) {
   });
 });
 
-var consula = new Promise(function(resolve, reject) {
+
+function Consulta1(id_est, id_sens, res) {
 
     var connection = mysql.createConnection({
       host: 'emecdrive.com',
@@ -228,14 +229,18 @@ var consula = new Promise(function(resolve, reject) {
     );
 
     connection.end();
+    
+    res(returnValue);
+}
 
-    resolve(returnValue)
-});
 
 
 restService.listen(process.env.PORT || 8000, function() {
   console.log("Server up and listening");
 });
+
+
+
 
 
 
