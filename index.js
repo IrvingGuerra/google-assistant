@@ -158,9 +158,10 @@ restService.post("/echo", function(req, res) {
     }
 
     //llama a la consulta que da la lectura
-    Consulta1(idestacion,idsensor);
+    Consulta1(idestacion);
+    Consulta2(id_lectura,idsensor);
 
-    respuesta = "El ultimo registro de "+valor_registro;
+    respuesta = "El ultimo registro ("+id_registro+") de "+valor_registro;
 
   }
   return res.json({
@@ -169,7 +170,7 @@ restService.post("/echo", function(req, res) {
   });
 });
 
-function Consulta1(id_est,id_sens){
+function Consulta1(id_est){
 
   var Sentencia = "SELECT MAX(id) AS id FROM lectures WHERE station_id = "+id_est;
 
@@ -181,17 +182,23 @@ function Consulta1(id_est,id_sens){
           }
        }
   );
+}
 
-  var Sentencia2 = "SELECT MAX(id),value AS id FROM registers WHERE lecture_id = '"+id_lectura+"' AND sensor_id = '"+id_sens+"'";
+
+function Consulta2(id_lec,id_sens){
+
+  var Sentencia = "SELECT MAX(id),value AS id FROM registers WHERE lecture_id = '"+id_lec+"' AND sensor_id = '"+id_sens+"'";
 
   connection.query(Sentencia2, function(error, result){
           if(error){
              throw error;
           }else{
+            id_registro = result[0].id;
             valor_registro = result[0].value;
           }
        }
   );
+
 
 }
 
