@@ -29,15 +29,6 @@ connection.connect(function(err) {
   console.log("Connected!");
 });
 
-connection.query("SELECT MAX(id) AS id FROM lectures WHERE station_id = 1", function(error, result){
-        if(error){
-           throw error;
-        }else{
-           id_lectura = result[0].id;
-        }
-     }
-);
-
 // Funcion que se llama desde DialogFlow
 
 restService.post("/echo", function(req, res) {
@@ -163,6 +154,8 @@ restService.post("/echo", function(req, res) {
         }
     }
 
+    llamar();
+
     respuesta = "El ultimo registro de "+id_lectura;
 
   }
@@ -171,6 +164,17 @@ restService.post("/echo", function(req, res) {
     source: "webhook-echo-sample"
   });
 });
+
+function llamar{
+  connection.query("SELECT MAX(id) AS id FROM lectures WHERE station_id = 1", function(error, result){
+        if(error){
+           throw error;
+        }else{
+           id_lectura = result[0].id;
+        }
+     }
+);
+}
 
 
 restService.listen(process.env.PORT || 8000, function() {
