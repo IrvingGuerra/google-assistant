@@ -172,7 +172,9 @@ restService.post("/echo", function(req, res) {
         }
     }
 
-    Consulta1(idestacion,idsensor);
+    consula.then(function(returnValue) {
+        valor_registro = returnValue;
+    });
 
     respuesta = Sensores + " en la " + Estacion + " es de "+ valor_registro + " " + tipoValor;
 
@@ -183,54 +185,57 @@ restService.post("/echo", function(req, res) {
   });
 });
 
-function Consulta1(id_est,id_sens){
+var consula = new Promise(function(resolve, reject) {
 
-  // Conexion
+    var connection = mysql.createConnection({
+      host: 'emecdrive.com',
+      user: 'emecdriv',
+      password: 'oI32k6cw5Q',
+      database: 'emecdriv_emec'
+    });
 
-  var connection = mysql.createConnection({
-    host: 'emecdrive.com',
-    user: 'emecdriv',
-    password: 'oI32k6cw5Q',
-    database: 'emecdriv_emec'
-  });
+    connection.connect(function(err) {
+      if (err) throw err;
+      console.log("Connected!");
+    });
 
-  connection.connect(function(err) {
-    if (err) throw err;
-    console.log("Connected!");
-  });
+    var id_lectura = "";
+    var id_registro = "";
+    var returnValue = "";
+   
+    var Sentencia = "SELECT MAX(id) AS id FROM lectures WHERE station_id = "+id_est;
 
-  var id_lectura = "";
-  var id_registro = "";
- 
-  var Sentencia = "SELECT MAX(id) AS id FROM lectures WHERE station_id = "+id_est;
-
-  connection.query(Sentencia, function(error, result){
-          if(error){
-             throw error;
-          }else{
-            id_lectura = result[0].id;
-          }
-       }
-  );
+    connection.query(Sentencia, function(error, result){
+            if(error){
+               throw error;
+            }else{
+              id_lectura = result[0].id;
+            }
+         }
+    );
 
 
-  var Sentencia2 = "SELECT MAX(id) AS id,value FROM registers WHERE lecture_id = '"+id_lectura+"' AND sensor_id = '"+id_sens+"'";
+    var Sentencia2 = "SELECT MAX(id) AS id,value FROM registers WHERE lecture_id = '"+id_lectura+"' AND sensor_id = '"+id_sens+"'";
 
-  connection.query(Sentencia2, function(error, result){
-          if(error){
-             throw error;
-          }else{
-            id_registro = result[0].id;
-            valor_registro = result[0].value;
-          }
-       }
-  );
+    connection.query(Sentencia2, function(error, result){
+            if(error){
+               throw error;
+            }else{
+              id_registro = result[0].id;
+              returnValue = result[0].value;
+            }
+         }
+    );
 
-  connection.end();
+    connection.end();
 
-}
+    resolve(returnValue)
+});
 
 
 restService.listen(process.env.PORT || 8000, function() {
   console.log("Server up and listening");
 });
+
+
+
