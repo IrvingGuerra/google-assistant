@@ -158,13 +158,9 @@ restService.post("/echo", function(req, res) {
     }
 
     //llama a la consulta que da la lectura
-    Consulta1(idestacion);
-    //llama a la consulta que da el id de registro
-    Consulta2(id_lectura,idsensor);
-    //llama a la consulta que da el valor
-    Consulta3(id_registro);
+    Consulta1(idestacion,idsensor);
 
-    respuesta = "El ultimo registro de "+valor;
+    respuesta = "El ultimo registro de "+id_registro;
 
   }
   return res.json({
@@ -173,9 +169,9 @@ restService.post("/echo", function(req, res) {
   });
 });
 
-function Consulta1(id_lec){
+function Consulta1(id_est,id_sens){
 
-  var Sentencia = "SELECT MAX(id) AS id FROM lectures WHERE station_id = "+id_lec;
+  var Sentencia = "SELECT MAX(id) AS id FROM lectures WHERE station_id = "+id_est;
 
   connection.query(Sentencia, function(error, result){
           if(error){
@@ -185,13 +181,10 @@ function Consulta1(id_lec){
           }
        }
   );
-}
 
-function Consulta2(id_lec, id_sens){
+  var Sentencia2 = "SELECT MAX(id) AS id FROM registers WHERE lecture_id = '"+id_lectura+"' AND sensor_id = '"+id_sens+"'";
 
-  var Sentencia = "SELECT MAX(id) AS id FROM registers WHERE lecture_id = '"+id_lec+"' AND sensor_id = '"+id_sens+"'";
-
-  connection.query(Sentencia, function(error, result){
+  connection.query(Sentencia2, function(error, result){
           if(error){
              throw error;
           }else{
@@ -200,23 +193,10 @@ function Consulta2(id_lec, id_sens){
        }
   );
 
+
 }
 
 
-function Consulta3(id_reg){
-
-  var Sentencia = "SELECT value FROM registers WHERE id = "+id_reg;
-
-  connection.query(Sentencia, function(error, result){
-          if(error){
-             throw error;
-          }else{
-            valor = result[0].value;
-          }
-       }
-  );
-  
-}
 
 
 restService.listen(process.env.PORT || 8000, function() {
