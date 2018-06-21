@@ -165,7 +165,7 @@ restService.post("/echo", function(req, res) {
   });
 });
 
-function llamar{
+function llamar(){
   connection.query("SELECT MAX(id) AS id FROM lectures WHERE station_id = 1", function(error, result){
         if(error){
            throw error;
