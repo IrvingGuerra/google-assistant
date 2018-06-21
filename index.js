@@ -230,8 +230,6 @@ function Consulta2(id_lec,id_sens){
        }
   );
 
-  connection.end();
-
 }
 
 restService.listen(process.env.PORT || 8000, function() {
