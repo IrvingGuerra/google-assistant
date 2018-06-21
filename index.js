@@ -174,9 +174,8 @@ restService.post("/echo", function(req, res) {
     var id_lectura = "";
 
     ConsultaLectura(idestacion, function(result) {
-      id_lectura = result;
+        id_lectura = result;
     });
-
 
     respuesta = Sensores + " en la " + Estacion + " es de "+ id_lectura + " " + tipoValor;
 
@@ -186,7 +185,6 @@ restService.post("/echo", function(req, res) {
     source: "webhook-echo-sample"
   });
 });
-
 
 
 function ConsultaLectura(id_estacion, resultado) {
@@ -204,20 +202,20 @@ function ConsultaLectura(id_estacion, resultado) {
       console.log("Connected!");
     });
 
-    var returnValue = "";
+    var returnValue = "Valor";
 
     connection.query("SELECT MAX(id) AS id FROM lectures WHERE station_id = "+id_estacion, function(error, result){
             if(error){
                throw error;
             }else{
               returnValue = result[0].id;
+              resultado(returnValue);
             }
          }
     );
 
     connection.end();
 
-    resultado(returnValue);
 }
 
 
