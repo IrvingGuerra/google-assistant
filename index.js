@@ -193,21 +193,7 @@ function Consulta1(id_est,id_sens){
        }
   );
 
-  var Sentencia3 = "SELECT value FROM registers WHERE id = "+id_registro;
-
-  connection.query(Sentencia3, function(error, result){
-          if(error){
-             throw error;
-          }else{
-            valor_registro = result[0].value;
-          }
-       }
-  );
-
 }
-
-
-
 
 restService.listen(process.env.PORT || 8000, function() {
   console.log("Server up and listening");
