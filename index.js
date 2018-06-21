@@ -62,48 +62,63 @@ restService.post("/echo", function(req, res) {
         switch(Sensores){
           case "Temperatura Ambiente":
             idsensor = "1";
+            tipoValor = "grados centigrados";
             break;
           case "Humedad Ambiente":
             idsensor = "2";
+            tipoValor = "por ciento";
             break;
           case "Radiación UV":
             idsensor = "3";
+            tipoValor = "radiacion ultra violeta";
             break;
           case "Luminosidad LUX":
             idsensor = "4";
+            tipoValor = "lux";
             break;
           case "Dióxido de Carbono":
             idsensor = "5";
+            tipoValor = "partes por millon";
             break;
           case "Flujo de Agua":
             idsensor = "6";
+            tipoValor = "litros";
             break;
           case "Dirección de Viento":
             idsensor = "7";
+            tipoValor = "N/S";
             break;
           case "Humedad De Sustrato 1":
             idsensor = "8";
+            tipoValor = "pascales";
             break;
           case "Temperatura Sustrato 1":
             idsensor = "9";
+            tipoValor = "grados centigrados";
             break;
           case "Contenido Volumétrico de Agua":
             idsensor = "10";
+            tipoValor = "por ciento";
             break;
           case "Conductividad Eléctrica":
             idsensor = "11";
+            tipoValor = "siemens entre centimetros";
             break;
           case "Temperatura Sustrato 2":
             idsensor = "12";
+            tipoValor = "grados centimetros";
             break;
           case "Voltage Estación Solar":
             idsensor = "13";
+            tipoValor = "volts";
             break;
           case "Velocidad De Viento":
             idsensor = "14";
+            tipoValor = "kilometros por hora";
             break;
           case "Pluviómetro":
             idsensor = "15";
+            tipoValor = "milimetros";
           break;
         }
     }else if (Estacion == "Neurona 2") {
@@ -111,48 +126,63 @@ restService.post("/echo", function(req, res) {
         switch(Sensores){
           case "Temperatura Ambiente":
             idsensor = "1";
+            tipoValor = "grados centigrados";
             break;
           case "Humedad Ambiente":
             idsensor = "2";
+            tipoValor = "por ciento";
             break;
           case "Radiación UV":
             idsensor = "3";
+            tipoValor = "radiacion ultra violeta";
             break;
           case "Luminosidad LUX":
             idsensor = "4";
+            tipoValor = "lux";
             break;
           case "Dióxido de Carbono":
             idsensor = "5";
+            tipoValor = "partes por millon";
             break;
           case "Flujo de Agua":
             idsensor = "6";
+            tipoValor = "litros";
             break;
           case "Dirección de Viento":
             idsensor = "7";
+            tipoValor = "N/S";
             break;
           case "Humedad De Sustrato 1":
             idsensor = "8";
+            tipoValor = "pascales";
             break;
           case "Temperatura Sustrato 1":
             idsensor = "9";
+            tipoValor = "grados centigrados";
             break;
           case "Contenido Volumétrico de Agua":
             idsensor = "10";
+            tipoValor = "por ciento";
             break;
           case "Conductividad Eléctrica":
             idsensor = "11";
+            tipoValor = "siemens entre centimetros";
             break;
           case "Temperatura Sustrato 2":
             idsensor = "12";
+            tipoValor = "grados centimetros";
             break;
           case "Voltage Estación Solar":
             idsensor = "13";
+            tipoValor = "volts";
             break;
           case "Velocidad De Viento":
             idsensor = "14";
+            tipoValor = "kilometros por hora";
             break;
           case "Pluviómetro":
             idsensor = "15";
+            tipoValor = "milimetros";
           break;
         }
     }
@@ -161,7 +191,7 @@ restService.post("/echo", function(req, res) {
     Consulta1(idestacion);
     Consulta2(id_lectura,idsensor);
 
-    respuesta = "El ultimo registro ("+id_registro+") de "+valor_registro;
+    respuesta = Sensores+" en la "+Estación+" es de: "+valor_registro+" "+tipoValor;
 
   }
   return res.json({
