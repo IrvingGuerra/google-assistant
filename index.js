@@ -166,7 +166,7 @@ restService.post("/echo", function(req, res) {
   });
 });
 
-function llamar(id_lec){
+function Consulta1(id_lec){
 
   var Sentencia = "SELECT MAX(id) AS id FROM lectures WHERE station_id = "+id_lec;
 
