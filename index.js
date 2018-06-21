@@ -30,9 +30,7 @@ connection.connect(function(err) {
   id_lectura = "2";
 });
 
-var SentenciaSQL = "SELECT * FROM lectures WHERE station_id = 1";
-
-var query = connection.query(SentenciaSQL, function(error, result){
+connection.query("SELECT * FROM lectures WHERE station_id = 1", function(error, result){
         if(error){
           id_lectura = "Error";
            throw error;
@@ -42,7 +40,7 @@ var query = connection.query(SentenciaSQL, function(error, result){
            if(resultado.length > 0){
               id_lectura = resultado[0].id;
            }else{
-              id_lectura = = "Fail";
+              id_lectura = "Fail";
            }
         }
      }
