@@ -6,6 +6,8 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const restService = express();
 const mysql = require('mysql');
+var valor_registro = "";
+
 
 restService.use(
   bodyParser.urlencoded({
@@ -170,9 +172,7 @@ restService.post("/echo", function(req, res) {
         }
     }
 
-    Consulta1(idestacion, idsensor, function(valor) {
-        var valor_registro = valor;  
-    });
+    Consulta1(idestacion,idsensor);
 
     respuesta = Sensores + " en la " + Estacion + " es de "+ valor_registro + " " + tipoValor;
 
@@ -183,7 +183,7 @@ restService.post("/echo", function(req, res) {
   });
 });
 
-function Consulta1(id_est,id_sens,resultado){
+function Consulta1(id_est,id_sens){
 
   // Conexion
 
@@ -201,8 +201,7 @@ function Consulta1(id_est,id_sens,resultado){
 
   var id_lectura = "";
   var id_registro = "";
-  var valor_registro = "";
-
+ 
   var Sentencia = "SELECT MAX(id) AS id FROM lectures WHERE station_id = "+id_est;
 
   connection.query(Sentencia, function(error, result){
@@ -229,7 +228,6 @@ function Consulta1(id_est,id_sens,resultado){
 
   connection.end();
 
-  resultado(valor_registro);
 }
 
 
