@@ -6,6 +6,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const restService = express();
 const mysql = require('mysql');
+var id_lectura = "";
 
 restService.use(
   bodyParser.urlencoded({
@@ -153,9 +154,8 @@ restService.post("/echo", function(req, res) {
         }
     }
 
-    var id_lectura = "";
     //llama a la primera consulta
-    id_lectura = Consulta1(idestacion);
+    Consulta1(idestacion);
 
     respuesta = "El ultimo registro de "+id_lectura;
 
@@ -174,7 +174,7 @@ function llamar(id_lec){
           if(error){
              throw error;
           }else{
-             return result[0].id;
+            id_lectura = result[0].id;
           }
        }
   );
