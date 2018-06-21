@@ -30,7 +30,6 @@ connection.connect(function(err) {
   id_lectura = "2";
 });
 
-
 // Funcion que se llama desde DialogFlow
 
 restService.post("/echo", function(req, res) {
@@ -155,11 +154,25 @@ restService.post("/echo", function(req, res) {
           break;
         }
     }
-    /////////////////
 
-    // Conexion a la base de datos
+/////////////////
 
-    
+var SentenciaSQL = "SELECT * FROM lectures WHERE station_id = 1";
+
+var query = connection.query(SentenciaSQL, function(error, result){
+      if(error){
+         throw error;
+      }else{
+         var resultado = result;
+         if(resultado.length > 0){
+            id_lectura = resultado[0].id;
+         }else{
+            console.log('Registro no encontrado');
+         }
+      }
+   }
+);
+
     
 
 //SQL SELECT * FROM lectures WHERE station_id = 1
