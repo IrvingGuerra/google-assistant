@@ -160,7 +160,7 @@ restService.post("/echo", function(req, res) {
     //llama a la consulta que da la lectura
     Consulta1(idestacion,idsensor);
 
-    respuesta = "El ultimo registro de "+id_registro;
+    respuesta = "El ultimo registro de "+valor;
 
   }
   return res.json({
@@ -189,6 +189,17 @@ function Consulta1(id_est,id_sens){
              throw error;
           }else{
             id_registro = result[0].id;
+          }
+       }
+  );
+
+  var Sentencia3 = "SELECT value FROM registers WHERE id = "+id_registro;
+
+  connection.query(Sentencia3, function(error, result){
+          if(error){
+             throw error;
+          }else{
+            valor = result[0].value;
           }
        }
   );
