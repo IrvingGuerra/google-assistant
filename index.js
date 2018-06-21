@@ -230,6 +230,7 @@ function Consulta2(id_lec,id_sens){
        }
   );
 
+  connection.end();
 
 }
 
