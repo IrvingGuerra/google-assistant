@@ -6,8 +6,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const restService = express();
 const mysql = require('mysql');
-var id_lectura = "";
-var id_registro = "";
 var valor_registro = "";
 var tipoValor = "";
 
@@ -200,7 +198,10 @@ function Consulta1(id_est,id_sens){
     if (err) throw err;
     console.log("Connected!");
   });
-  
+
+  var id_lectura = "";
+  var id_registro = "";
+
   var Sentencia = "SELECT MAX(id) AS id FROM lectures WHERE station_id = "+id_est;
 
   connection.query(Sentencia, function(error, result){
