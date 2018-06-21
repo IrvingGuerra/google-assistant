@@ -18,20 +18,6 @@ restService.use(
 );
 restService.use(bodyParser.json());
 
-// Conexion
-
-var connection = mysql.createConnection({
-  host: 'emecdrive.com',
-  user: 'emecdriv',
-  password: 'oI32k6cw5Q',
-  database: 'emecdriv_emec'
-});
-
-connection.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected!");
-});
-
 // Funcion que se llama desde DialogFlow
 
 restService.post("/echo", function(req, res) {
@@ -188,9 +174,7 @@ restService.post("/echo", function(req, res) {
     }
 
     //llama a la consulta que da la lectura
-    Consulta1(idestacion);
-    Consulta2(id_lectura,idsensor);
-
+    Consulta1(idestacion,idsensor);
 
     respuesta = Sensores + " en la " + Estacion + " es de "+ valor_registro + " " + tipoValor;
 
@@ -201,8 +185,22 @@ restService.post("/echo", function(req, res) {
   });
 });
 
-function Consulta1(id_est){
+function Consulta1(id_est,id_sens){
 
+  // Conexion
+
+  var connection = mysql.createConnection({
+    host: 'emecdrive.com',
+    user: 'emecdriv',
+    password: 'oI32k6cw5Q',
+    database: 'emecdriv_emec'
+  });
+
+  connection.connect(function(err) {
+    if (err) throw err;
+    console.log("Connected!");
+  });
+  
   var Sentencia = "SELECT MAX(id) AS id FROM lectures WHERE station_id = "+id_est;
 
   connection.query(Sentencia, function(error, result){
@@ -213,14 +211,11 @@ function Consulta1(id_est){
           }
        }
   );
-}
 
 
-function Consulta2(id_lec,id_sens){
+  var Sentencia2 = "SELECT MAX(id) AS id,value FROM registers WHERE lecture_id = '"+id_lectura+"' AND sensor_id = '"+id_sens+"'";
 
-  var Sentencia = "SELECT MAX(id) AS id,value FROM registers WHERE lecture_id = '"+id_lec+"' AND sensor_id = '"+id_sens+"'";
-
-  connection.query(Sentencia, function(error, result){
+  connection.query(Sentencia2, function(error, result){
           if(error){
              throw error;
           }else{
@@ -230,7 +225,10 @@ function Consulta2(id_lec,id_sens){
        }
   );
 
+  connection.end();
+
 }
+
 
 restService.listen(process.env.PORT || 8000, function() {
   console.log("Server up and listening");
