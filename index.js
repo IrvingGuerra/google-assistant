@@ -155,6 +155,7 @@ restService.post("/echo", function(req, res) {
        if(error){
           id_lectura = "2";
        }else{
+          console.log("Connected!");
           id_lectura = "3";
        }
     });
