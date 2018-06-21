@@ -191,7 +191,7 @@ restService.post("/echo", function(req, res) {
     Consulta1(idestacion);
     Consulta2(id_lectura,idsensor);
 
-    respuesta = valor_registro;
+    respuesta = Sensores + " en la "+Estacion+" es de "+valor_registro+ " "+tipoValor;
 
   }
   return res.json({
