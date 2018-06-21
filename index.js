@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const restService = express();
 const mysql = require('mysql');
 var id_lectura = "";
+var id_registro = "";
 var valor = "";
 var tipoValor = "";
 
@@ -161,7 +162,7 @@ restService.post("/echo", function(req, res) {
     //llama a la segunda consulta
     Consulta2(id_lectura,idsensor);
 
-    respuesta = "El ultimo registro de "+valor;
+    respuesta = "El ultimo registro de "+id_registro;
 
   }
   return res.json({
@@ -188,8 +189,6 @@ function Consulta2(id_lec, id_sens){
 
   var Sentencia = "SELECT MAX(id) AS id FROM registers WHERE lecture_id = '"+id_lec+"' AND sensor_id = '"+id_sens+"'";
 
-  var id_registro = "";
-
   connection.query(Sentencia, function(error, result){
           if(error){
              throw error;
@@ -198,19 +197,6 @@ function Consulta2(id_lec, id_sens){
           }
        }
   );
-
-  var Sentencia2 = "SELECT value FROM registers WHERE id = "+id_registro;
-
-  connection.query(Sentencia2, function(error, result){
-          if(error){
-             throw error;
-          }else{
-            valor = result[0].value;
-          }
-       }
-  );
-
-
 
 }
 
