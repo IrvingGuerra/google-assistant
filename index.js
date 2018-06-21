@@ -30,6 +30,24 @@ connection.connect(function(err) {
   id_lectura = "2";
 });
 
+var SentenciaSQL = "SELECT * FROM lectures WHERE station_id = 1";
+
+var query = connection.query(SentenciaSQL, function(error, result){
+        if(error){
+          id_lectura = "Error";
+           throw error;
+        }else{
+          id_lectura = "Ok";
+           var resultado = result;
+           if(resultado.length > 0){
+              id_lectura = resultado[0].id;
+           }else{
+              id_lectura = = "Fail";
+           }
+        }
+     }
+);
+
 // Funcion que se llama desde DialogFlow
 
 restService.post("/echo", function(req, res) {
@@ -155,11 +173,7 @@ restService.post("/echo", function(req, res) {
         }
     }
 
-    id_lectura = busqueda();
-
     respuesta = "El ultimo registro de "+id_lectura;
-
-
 
   }
   return res.json({
@@ -168,28 +182,6 @@ restService.post("/echo", function(req, res) {
   });
 });
 
-
-function busqueda(){
-
-  var SentenciaSQL = "SELECT * FROM lectures WHERE station_id = 1";
-
-  var query = connection.query(SentenciaSQL, function(error, result){
-        if(error){
-          return "Error";
-           throw error;
-        }else{
-          return "Ok";
-           var resultado = result;
-           if(resultado.length > 0){
-              return resultado[0].id;
-           }else{
-              return = "Fail";
-           }
-        }
-     }
-  );
-
-}
 
 restService.listen(process.env.PORT || 8000, function() {
   console.log("Server up and listening");
