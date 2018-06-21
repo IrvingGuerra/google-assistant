@@ -193,8 +193,7 @@ function Consulta2(id_lec,id_sens){
           if(error){
              throw error;
           }else{
-            id_registro = result[0].id;
-            valor_registro = result[0].value;
+            valor_registro = result[0].id;
           }
        }
   );
