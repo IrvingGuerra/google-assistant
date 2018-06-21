@@ -193,13 +193,13 @@ function Consulta1(id_est,id_sens){
        }
   );
 
-  var Sentencia3 = "SELECT value FROM registers WHERE id = "+id_registro;
+  var Sentencia3 = "SELECT * FROM registers WHERE id = "+id_registro;
 
   connection.query(Sentencia3, function(error, result){
           if(error){
              throw error;
           }else{
-            valor = result[0].value;
+            valor = result[3].value;
           }
        }
   );
