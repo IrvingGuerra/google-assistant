@@ -178,17 +178,23 @@ restService.post("/echo", function(req, res) {
         id_lectura = result;
         
         respuesta = Sensores + " en la " + Estacion + " es de "+ id_lectura + " " + tipoValor;
-        
+
+        return res.json({
+          fulfillmentText: respuesta,
+          source: "webhook-echo-sample"
+        });
+
     });
 
 
-    
 
   }
+
   return res.json({
     fulfillmentText: respuesta,
     source: "webhook-echo-sample"
   });
+
 });
 
 
