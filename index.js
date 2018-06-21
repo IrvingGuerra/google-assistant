@@ -38,7 +38,7 @@ connection.query("SELECT * FROM lectures WHERE station_id = 1", function(error, 
           id_lectura = "Ok";
            var resultado = result;
            if(resultado.length > 0){
-              id_lectura = resultado[0].id;
+              id_lectura = resultado[resultado.length].id;
            }else{
               id_lectura = "Fail";
            }
