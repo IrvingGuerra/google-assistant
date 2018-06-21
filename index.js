@@ -161,21 +161,19 @@ var SentenciaSQL = "SELECT * FROM lectures WHERE station_id = 1";
 
 var query = connection.query(SentenciaSQL, function(error, result){
       if(error){
+        id_lectura = "Error";
          throw error;
       }else{
+        id_lectura = "Ok";
          var resultado = result;
          if(resultado.length > 0){
             id_lectura = resultado[0].id;
          }else{
-            console.log('Registro no encontrado');
+            id_lectura = "Fail";
          }
       }
    }
 );
-
-    
-
-//SQL SELECT * FROM lectures WHERE station_id = 1
 
     respuesta = "El ultimo registro de "+id_lectura;
 
