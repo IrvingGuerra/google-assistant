@@ -30,18 +30,11 @@ connection.connect(function(err) {
   id_lectura = "2";
 });
 
-connection.query("SELECT * FROM lectures WHERE station_id = 1", function(error, result){
+connection.query("SELECT * FROM lectures WHERE station_id = 1 order by id asc limit 1", function(error, result){
         if(error){
-          id_lectura = "Error";
            throw error;
         }else{
-          id_lectura = "Ok";
-           var resultado = result;
-           if(resultado.length > 0){
-              id_lectura = resultado[resultado.length].id;
-           }else{
-              id_lectura = "Fail";
-           }
+           var id_lectura = result;
         }
      }
 );
