@@ -5,7 +5,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const restService = express();
-var mysql = require('mysql');
+const mysql = require('mysql');
 
 restService.use(
   bodyParser.urlencoded({
@@ -151,13 +151,9 @@ restService.post("/echo", function(req, res) {
        database: 'emecdriv_emec'
     });
 
-    connection.connect(function(error){
-       if(error){
-          id_lectura = "2";
-       }else{
-          console.log("Connected!");
-          id_lectura = "3";
-       }
+    con.connect(function(err) {
+      if (err) throw err;
+      console.log("Connected!");
     });
 
 
