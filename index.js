@@ -6,7 +6,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const restService = express();
 const mysql = require('mysql');
-var valor_registro = "";
 
 
 restService.use(
@@ -172,11 +171,14 @@ restService.post("/echo", function(req, res) {
         }
     }
 
-    Consulta1(idestacion, idsensor, function(response) {
-        valor_registro = response;    
+    var id_lectura = "";
+
+    ConsultaLectura(idestacion, function(result) {
+      id_lectura = result;
     });
 
-    respuesta = Sensores + " en la " + Estacion + " es de "+ valor_registro + " " + tipoValor;
+
+    respuesta = Sensores + " en la " + Estacion + " es de "+ id_lectura + " " + tipoValor;
 
   }
   return res.json({
@@ -186,7 +188,9 @@ restService.post("/echo", function(req, res) {
 });
 
 
-function Consulta1(id_est, id_sens, res) {
+
+function ConsultaLectura(id_estacion, resultado) {
+    
 
     var connection = mysql.createConnection({
       host: 'emecdrive.com',
@@ -200,39 +204,21 @@ function Consulta1(id_est, id_sens, res) {
       console.log("Connected!");
     });
 
-    var id_lectura = "";
-    var id_registro = "";
     var returnValue = "";
-   
-    var Sentencia = "SELECT MAX(id) AS id FROM lectures WHERE station_id = "+id_est;
 
-    connection.query(Sentencia, function(error, result){
+    connection.query("SELECT MAX(id) AS id FROM lectures WHERE station_id = "+id_estacion, function(error, result){
             if(error){
                throw error;
             }else{
-              id_lectura = result[0].id;
-            }
-         }
-    );
-
-
-    var Sentencia2 = "SELECT MAX(id) AS id,value FROM registers WHERE lecture_id = '"+id_lectura+"' AND sensor_id = '"+id_sens+"'";
-
-    connection.query(Sentencia2, function(error, result){
-            if(error){
-               throw error;
-            }else{
-              id_registro = result[0].id;
-              returnValue = result[0].value;
+              returnValue = result[0].id;
             }
          }
     );
 
     connection.end();
-    
-    res(returnValue);
-}
 
+    resultado(returnValue);
+}
 
 
 restService.listen(process.env.PORT || 8000, function() {
