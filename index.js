@@ -170,7 +170,9 @@ restService.post("/echo", function(req, res) {
         }
     }
 
-    var valor_registro = Consulta1(idestacion,idsensor);
+    Consulta1(idestacion, idsensor, function(valor) {
+        var valor_registro = valor;  
+    });
 
     respuesta = Sensores + " en la " + Estacion + " es de "+ valor_registro + " " + tipoValor;
 
@@ -181,7 +183,7 @@ restService.post("/echo", function(req, res) {
   });
 });
 
-function Consulta1(id_est,id_sens){
+function Consulta1(id_est,id_sens,resultado){
 
   // Conexion
 
@@ -227,7 +229,7 @@ function Consulta1(id_est,id_sens){
 
   connection.end();
 
-  return valor_registro;
+  resultado(valor_registro);
 }
 
 
