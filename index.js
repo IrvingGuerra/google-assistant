@@ -27,14 +27,13 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   console.log("Connected!");
-  id_lectura = "2";
 });
 
-connection.query("SELECT * FROM lectures WHERE station_id = 1 order by id asc limit 1", function(error, result){
+connection.query("SELECT MAX(id) AS id FROM lectures WHERE station_id = 1", function(error, result){
         if(error){
            throw error;
         }else{
-           var id_lectura = result;
+           id_lectura = result[0].id;
         }
      }
 );
