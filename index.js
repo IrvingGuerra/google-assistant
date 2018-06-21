@@ -160,7 +160,7 @@ restService.post("/echo", function(req, res) {
     //llama a la consulta que da la lectura
     Consulta1(idestacion,idsensor);
 
-    respuesta = "El ultimo registro de "+valor_registro;
+    respuesta = "El ultimo registro("+id_registro+") de "+valor_registro;
 
   }
   return res.json({
