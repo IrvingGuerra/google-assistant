@@ -151,9 +151,10 @@ restService.post("/echo", function(req, res) {
        database: 'emecdriv_emec'
     });
 
-    con.connect(function(err) {
+    connection.connect(function(err) {
       if (err) throw err;
       console.log("Connected!");
+      var id_lectura = "2";
     });
 
 
