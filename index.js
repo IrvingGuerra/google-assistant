@@ -215,7 +215,7 @@ function Consulta3(id_reg){
           }
        }
   );
-
+  
 }
 
 
