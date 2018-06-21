@@ -6,7 +6,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const restService = express();
 const mysql = require('mysql');
-var id_lectura = "1";
 
 restService.use(
   bodyParser.urlencoded({
@@ -154,7 +153,9 @@ restService.post("/echo", function(req, res) {
         }
     }
 
-    llamar();
+    var id_lectura = "";
+    //llama a la primera consulta
+    id_lectura = Consulta1(idestacion);
 
     respuesta = "El ultimo registro de "+id_lectura;
 
@@ -165,15 +166,18 @@ restService.post("/echo", function(req, res) {
   });
 });
 
-function llamar(){
-  connection.query("SELECT MAX(id) AS id FROM lectures WHERE station_id = 1", function(error, result){
-        if(error){
-           throw error;
-        }else{
-           id_lectura = result[0].id;
-        }
-     }
-);
+function llamar(id_lec){
+
+  var Sentencia = "SELECT MAX(id) AS id FROM lectures WHERE station_id = "+id_lec;
+
+  connection.query(Sentencia, function(error, result){
+          if(error){
+             throw error;
+          }else{
+             return result[0].id;
+          }
+       }
+  );
 }
 
 
