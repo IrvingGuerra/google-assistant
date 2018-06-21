@@ -155,25 +155,7 @@ restService.post("/echo", function(req, res) {
         }
     }
 
-/////////////////
-
-var SentenciaSQL = "SELECT * FROM lectures WHERE station_id = 1";
-
-var query = connection.query(SentenciaSQL, function(error, result){
-      if(error){
-        id_lectura = "Error";
-         throw error;
-      }else{
-        id_lectura = "Ok";
-         var resultado = result;
-         if(resultado.length > 0){
-            id_lectura = resultado[0].id;
-         }else{
-            id_lectura = "Fail";
-         }
-      }
-   }
-);
+    id_lectura = busqueda();
 
     respuesta = "El ultimo registro de "+id_lectura;
 
@@ -185,6 +167,29 @@ var query = connection.query(SentenciaSQL, function(error, result){
     source: "webhook-echo-sample"
   });
 });
+
+
+function busqueda(){
+
+  var SentenciaSQL = "SELECT * FROM lectures WHERE station_id = 1";
+
+  var query = connection.query(SentenciaSQL, function(error, result){
+        if(error){
+          return "Error";
+           throw error;
+        }else{
+          return "Ok";
+           var resultado = result;
+           if(resultado.length > 0){
+              return resultado[0].id;
+           }else{
+              return = "Fail";
+           }
+        }
+     }
+  );
+
+}
 
 restService.listen(process.env.PORT || 8000, function() {
   console.log("Server up and listening");
