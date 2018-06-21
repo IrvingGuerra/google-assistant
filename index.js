@@ -217,7 +217,7 @@ function Consulta1(id_est){
 
 function Consulta2(id_lec,id_sens){
 
-  var Sentencia = "SELECT MAX(id) AS id,value FROM registers WHERE lecture_id = '"+id_lec+"' AND sensor_id = '"+id_sens+"'";
+  var Sentencia = "SELECT id,value FROM registers WHERE lecture_id = '"+id_lec+"' AND sensor_id = '"+id_sens+"'";
 
   connection.query(Sentencia, function(error, result){
           if(error){
