@@ -178,18 +178,36 @@ restService.post("/echo", function(req, res) {
 
         id_lectura = result;
 
-        ConsultaValor(id_lectura,idsensor, function(result) {
+        if (id_lectura != null) {
 
-          valor_lectura = result;
+          ConsultaValor(id_lectura,idsensor, function(result) {
 
-          respuesta = "Debug: " + id_lectura + ", " + valor_lectura + "End" + Sensores + " en la " + Estacion + " es de "+ valor_lectura + " " + tipoValor +". ¿Necesitas algo más? ";
+            valor_lectura = result;
 
-          return res.json({
-            fulfillmentText: respuesta,
-            source: "webhook-echo-sample"
+            if (valor_lectura != null) {
+              respuesta = "Debug: " + id_lectura + ", " + valor_lectura + "End" + Sensores + " en la " + Estacion + " es de "+ valor_lectura + " " + tipoValor +". ¿Necesitas algo más? ";
+
+              return res.json({
+                fulfillmentText: respuesta,
+                source: "webhook-echo-sample"
+              });
+            }else{
+              respuesta = "Lo siento, no he encontrado esa información ¿Deseas que busque algo más?";
+              return res.json({
+                  fulfillmentText: respuesta,
+                  source: "webhook-echo-sample"
+              });
+            }
+
           });
 
-        });
+        }else{
+          respuesta = "Lo siento, no he encontrado esa información ¿Deseas que busque algo más?";
+          return res.json({
+              fulfillmentText: respuesta,
+              source: "webhook-echo-sample"
+          });
+        }
 
     });
 
