@@ -182,7 +182,7 @@ restService.post("/echo", function(req, res) {
 
           valor_lectura = result;
 
-          respuesta = Sensores + " en la " + Estacion + " es de "+ valor_lectura + " " + tipoValor +". ¿Necesitas algo más? ";
+          respuesta = "Debug: " + id_lectura + ", " + valor_lectura + "End" + Sensores + " en la " + Estacion + " es de "+ valor_lectura + " " + tipoValor +". ¿Necesitas algo más? ";
 
           return res.json({
             fulfillmentText: respuesta,
