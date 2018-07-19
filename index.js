@@ -70,7 +70,7 @@ restService.post("/echo", function(req, res) {
             break;
           case "Dirección de Viento":
             idsensor = "7";
-            tipoValor = "N/S";
+            tipoValor = "";
             break;
           case "Humedad De Sustrato 1":
             idsensor = "8";
@@ -86,11 +86,12 @@ restService.post("/echo", function(req, res) {
             break;
           case "Conductividad Eléctrica":
             idsensor = "11";
-            tipoValor = "siemens entre centimetros";
+            tipoValor = "siemens centímetros";
             break;
           case "Temperatura Sustrato 2":
+            Sensores = "Temperatura de Sustrato";
             idsensor = "12";
-            tipoValor = "grados centimetros";
+            tipoValor = "grados centigrados";
             break;
           case "Voltage Estación Solar":
             idsensor = "13";
@@ -134,7 +135,7 @@ restService.post("/echo", function(req, res) {
             break;
           case "Dirección de Viento":
             idsensor = "7";
-            tipoValor = "N/S";
+            tipoValor = "";
             break;
           case "Humedad De Sustrato 1":
             idsensor = "8";
@@ -150,11 +151,12 @@ restService.post("/echo", function(req, res) {
             break;
           case "Conductividad Eléctrica":
             idsensor = "11";
-            tipoValor = "siemens entre centimetros";
+            tipoValor = "siemens centímetros";
             break;
           case "Temperatura Sustrato 2":
+            Sensores = "Temperatura de Sustrato";
             idsensor = "12";
-            tipoValor = "grados centimetros";
+            tipoValor = "grados centigrados";
             break;
           case "Voltage Estación Solar":
             idsensor = "13";
@@ -185,7 +187,7 @@ restService.post("/echo", function(req, res) {
             valor_lectura = result;
 
             if (valor_lectura != null) {
-              respuesta = "Debug: " + id_lectura + ", " + valor_lectura + "End" + Sensores + " en la " + Estacion + " es de "+ valor_lectura + " " + tipoValor +". ¿Necesitas algo más? ";
+              respuesta = Sensores + " en la " + Estacion + " es de "+ valor_lectura + " " + tipoValor +". ¿Necesitas algo más? ";
 
               return res.json({
                 fulfillmentText: respuesta,
