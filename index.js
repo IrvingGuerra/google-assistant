@@ -147,6 +147,7 @@ restService.post("/echo", function(req, res) {
         }
 
     });
+
   }
 /*
   return res.json({
@@ -161,34 +162,22 @@ function ConsultaLectura(id_estacion, resultado) {
     
 
     var connection = mysql.createConnection({
-      host: 'home747756015.1and1-data.host',
-      port: 22,
-      user: 'u94379490',
-      password: 'Neurona.1',º
-      database: 'db748943677'
+      host: 'emecdrive.com',
+      user: 'emecdriv',
+      password: 'oI32k6cw5Q',
+      database: 'emecdriv_emec'
     });
 
     connection.connect(function(err) {
-      if (err){
-      	respuesta = "Error en la conexion";
-        return res.json({
-            fulfillmentText: respuesta,
-            source: "webhook-echo-sample"
-        });
-      }else{
-      	console.log("Connected!");
-      } throw err;
+      if (err) throw err;
+      console.log("Connected!");
     });
 
     var returnValue = "Valor";
 
     connection.query("SELECT MAX(id) AS id FROM lectures WHERE station_id = "+id_estacion, function(error, result){
             if(error){
-               respuesta = "Error en la consulta";
-		        return res.json({
-		            fulfillmentText: respuesta,
-		            source: "webhook-echo-sample"
-		        });
+               throw error;
             }else{
               returnValue = result[0].id;
               resultado(returnValue);
@@ -204,23 +193,15 @@ function ConsultaValor(id_lectura,id_sensor, resultado) {
     
 
     var connection = mysql.createConnection({
-      host: 'home747756015.1and1-data.host',
-      port: 22,
-      user: 'u94379490',
-      password: 'Neurona.1',
-      database: 'db748943677'
+      host: 'emecdrive.com',
+      user: 'emecdriv',
+      password: 'oI32k6cw5Q',
+      database: 'emecdriv_emec'
     });
 
     connection.connect(function(err) {
-      if (err){
-      	respuesta = "Error en la conexion";
-        return res.json({
-            fulfillmentText: respuesta,
-            source: "webhook-echo-sample"
-        });
-      }else{
+      if (err) throw err;
       console.log("Connected!");
-      }
     });
 
     var returnValue = "Valor";
@@ -229,11 +210,7 @@ function ConsultaValor(id_lectura,id_sensor, resultado) {
 
     connection.query(Sentencia, function(error, result){
             if(error){
-               respuesta = "Error en la consulta";
-		        return res.json({
-		            fulfillmentText: respuesta,
-		            source: "webhook-echo-sample"
-		        });
+               throw error;
             }else{
               returnValue = result[0].value;
               resultado(returnValue);
