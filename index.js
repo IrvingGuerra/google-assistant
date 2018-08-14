@@ -6,7 +6,10 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const restService = express();
 const mysql = require('mysql');
-
+const HOST = "emecdrive.com";
+const USER = "emecdriv";
+const PASSWORD = "oI32k6cw5Q";
+const DATABASE = "emecdriv_emec";
 
 restService.use(
   bodyParser.urlencoded({
@@ -162,10 +165,10 @@ function ConsultaLectura(id_estacion, resultado) {
     
 
     var connection = mysql.createConnection({
-      host: 'emecdrive.com',
-      user: 'emecdriv',
-      password: 'oI32k6cw5Q',
-      database: 'emecdriv_emec'
+      host: HOST,
+      user: USER,
+      password: PASSWORD,
+      database: DATABASE
     });
 
     connection.connect(function(err) {
@@ -188,15 +191,14 @@ function ConsultaLectura(id_estacion, resultado) {
     connection.end();
 }
 
-
 function ConsultaValor(id_lectura,id_sensor, resultado) {
     
 
     var connection = mysql.createConnection({
-      host: 'emecdrive.com',
-      user: 'emecdriv',
-      password: 'oI32k6cw5Q',
-      database: 'emecdriv_emec'
+      host: HOST,
+      user: USER,
+      password: PASSWORD,
+      database: DATABASE
     });
 
     connection.connect(function(err) {
@@ -220,7 +222,6 @@ function ConsultaValor(id_lectura,id_sensor, resultado) {
 
     connection.end();
 }
-
 
 restService.listen(process.env.PORT || 8000, function() {
   console.log("Server up and listening");
