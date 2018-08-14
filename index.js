@@ -7,7 +7,7 @@ const bodyParser = require("body-parser");
 const restService = express();
 const mysql = require('mysql');
 
-const HOST = "home747756015.1and1-data.host";
+const HOST = "db748943677.db.1and1.com";
 const USER = "u94379490";
 const PASSWORD = "Neurona.1";
 const DATABASE = "db748943677";
