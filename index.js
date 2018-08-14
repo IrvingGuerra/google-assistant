@@ -9,7 +9,7 @@ const mysql = require('mysql');
 
 const HOST = "home747756015.1and1-data.host";
 const USER = "u94379490";
-const PASSWORD = "Neurona1";
+const PASSWORD = "Neurona.1";
 const DATABASE = "db748943677";
 
 restService.use(
