@@ -104,17 +104,9 @@ restService.post("/echo", function(req, res) {
 			tipoValor = "milimetros";
 			break;
 	}
-	switch(Estacion){
-		case "Neurona 1":
-			idestacion = "1";
-			break;
-		case "Neurona 2":
-			idestacion = "2";
-			break;
-		case "Neurona 3":
-			idestacion = "3";
-			break;
-	}
+
+	var array = Estacion.split(" ");
+	idestacion = array[1];
 
     var id_lectura = "";
     var valor_lectura = "";
