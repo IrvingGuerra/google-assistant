@@ -40,138 +40,81 @@ restService.post("/echo", function(req, res) {
   if (Sensores == "vacio" || Estacion == "vacio") {
     respuesta = "Disculpe, necesito que indique el sensor y la estacion."
   }else{
-
-    if (Estacion == "Neurona 1") {
-      idestacion = "1";
-        switch(Sensores){
-          case "Temperatura Ambiente":
-            idsensor = "1";
-            tipoValor = "grados centigrados";
-            break;
-          case "Humedad Ambiente":
-            idsensor = "2";
-            tipoValor = "por ciento";
-            break;
-          case "Radiación UV":
-            idsensor = "4";
-            tipoValor = "radiacion ultra violeta";
-            break;
-          case "Luminosidad LUX":
-            idsensor = "3";
-            tipoValor = "lux";
-            break;
-          case "Dióxido de Carbono":
-            idsensor = "5";
-            tipoValor = "partes por millon";
-            break;
-          case "Flujo de Agua":
-            idsensor = "11";
-            tipoValor = "litros";
-            break;
-          case "Dirección de Viento":
-            idsensor = "7";
-            tipoValor = "";
-            break;
-          case "Humedad De Sustrato 1":
-            idsensor = "8";
-            tipoValor = "pascales";
-            break;
-          case "Temperatura Sustrato 1":
-            idsensor = "9";
-            tipoValor = "grados centigrados";
-            break;
-          case "Contenido Volumétrico de Agua":
-            idsensor = "10";
-            tipoValor = "por ciento";
-            break;
-          case "Conductividad Eléctrica":
-            idsensor = "14";
-            tipoValor = "siemens centímetros";
-            break;
-          case "Temperatura Sustrato 2":
-            Sensores = "Temperatura de Sustrato";
-            idsensor = "12";
-            tipoValor = "grados centigrados";
-            break;
-          case "Voltage Estación Solar":
-            idsensor = "15";
-            tipoValor = "volts";
-            break;
-          case "Velocidad De Viento":
-            idsensor = "6";
-            tipoValor = "kilometros por hora";
-            break;
-          case "Pluviómetro":
-            idsensor = "8";
-            tipoValor = "milimetros";
-          break;
-        }
-    }else if (Estacion == "Neurona 2") {
-      idestacion = "2";
-        switch(Sensores){
-          case "Temperatura Ambiente":
-            idsensor = "1";
-            tipoValor = "grados centigrados";
-            break;
-          case "Humedad Ambiente":
-            idsensor = "2";
-            tipoValor = "por ciento";
-            break;
-          case "Radiación UV":
-            idsensor = "4";
-            tipoValor = "radiacion ultra violeta";
-            break;
-          case "Luminosidad LUX":
-            idsensor = "3";
-            tipoValor = "lux";
-            break;
-          case "Dióxido de Carbono":
-            idsensor = "5";
-            tipoValor = "partes por millon";
-            break;
-          case "Flujo de Agua":
-            idsensor = "11";
-            tipoValor = "litros";
-            break;
-          case "Dirección de Viento":
-            idsensor = "7";
-            tipoValor = "";
-            break;
-          case "Humedad De Sustrato 1":
-            idsensor = "8";
-            tipoValor = "pascales";
-            break;
-          case "Temperatura Sustrato 1":
-            idsensor = "9";
-            tipoValor = "grados centigrados";
-            break;
-          case "Contenido Volumétrico de Agua":
-            idsensor = "10";
-            tipoValor = "por ciento";
-            break;
-          case "Conductividad Eléctrica":
-            idsensor = "14";
-            tipoValor = "siemens centímetros";
-            break;
-          case "Temperatura Sustrato 2":
-            Sensores = "Temperatura de Sustrato";
-            idsensor = "12";
-            tipoValor = "grados centigrados";
-            break;
-          case "Voltage Estación Solar":
-            idsensor = "15";
-            tipoValor = "volts";
-            break;
-          case "Velocidad De Viento":
-            idsensor = "6";
-            tipoValor = "kilometros por hora";
-            break;
-          case "Pluviómetro":
-            idsensor = "8";
-            tipoValor = "milimetros";
-          break;
-        }
-    }
+  	//En esta parte se confirma que se enviaron los parametros correctos
+  	switch(Sensores){
+		case "Temperatura Ambiente":
+			idsensor = "1";
+			tipoValor = "grados centigrados";
+			break;
+		case "Humedad Ambiente":
+			idsensor = "2";
+			tipoValor = "por ciento";
+			break;
+		case "Radiación UV":
+			idsensor = "4";
+			tipoValor = "radiacion ultra violeta";
+			break;
+		case "Luminosidad LUX":
+			idsensor = "3";
+			tipoValor = "lux";
+			break;
+		case "Dióxido de Carbono":
+			idsensor = "5";
+			tipoValor = "partes por millon";
+			break;
+		case "Flujo de Agua":
+			idsensor = "11";
+			tipoValor = "litros";
+			break;
+		case "Dirección de Viento":
+			idsensor = "7";
+			tipoValor = "";
+			break;
+		case "Humedad De Sustrato 1":
+			idsensor = "8";
+			tipoValor = "pascales";
+			break;
+		case "Temperatura Sustrato 1":
+			idsensor = "9";
+			tipoValor = "grados centigrados";
+			break;
+		case "Contenido Volumétrico de Agua":
+			idsensor = "10";
+			tipoValor = "por ciento";
+			break;
+		case "Conductividad Eléctrica":
+			idsensor = "14";
+			tipoValor = "siemens centímetros";
+			break;
+		case "Temperatura Sustrato 2":
+			Sensores = "Temperatura de Sustrato";
+			idsensor = "12";
+			tipoValor = "grados centigrados";
+			break;
+		case "Voltage Estación Solar":
+			idsensor = "15";
+			tipoValor = "volts";
+			break;
+		case "Velocidad De Viento":
+			idsensor = "6";
+			tipoValor = "kilometros por hora";
+			break;
+		case "Pluviómetro":
+			idsensor = "8";
+			tipoValor = "milimetros";
+			break;
+	}
+	switch(Estacion){
+		case "Neurona 1":
+			idestacion = "1";
+			break;
+		case "Neurona 2":
+			idestacion = "2";
+			break;
+		case "Neurona 3":
+			idestacion = "3";
+			break;
+	}
 
     var id_lectura = "";
     var valor_lectura = "";
