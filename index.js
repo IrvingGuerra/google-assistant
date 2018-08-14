@@ -162,8 +162,9 @@ function ConsultaLectura(id_estacion, resultado) {
 
     var connection = mysql.createConnection({
       host: 'home747756015.1and1-data.host',
+      port: 22,
       user: 'u94379490',
-      password: 'Neurona.1',
+      password: 'Neurona.1',º
       database: 'db748943677'
     });
 
@@ -193,6 +194,7 @@ function ConsultaValor(id_lectura,id_sensor, resultado) {
 
     var connection = mysql.createConnection({
       host: 'home747756015.1and1-data.host',
+      port: 22,
       user: 'u94379490',
       password: 'Neurona.1',
       database: 'db748943677'
