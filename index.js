@@ -147,7 +147,6 @@ restService.post("/echo", function(req, res) {
         }
 
     });
-
   }
 /*
   return res.json({
@@ -162,10 +161,10 @@ function ConsultaLectura(id_estacion, resultado) {
     
 
     var connection = mysql.createConnection({
-      host: 'emecdrive.com',
-      user: 'emecdriv',
-      password: 'oI32k6cw5Q',
-      database: 'emecdriv_emec'
+      host: 'home747756015.1and1-data.host',
+      user: 'u94379490',
+      password: 'Neurona.1',
+      database: 'db748943677'
     });
 
     connection.connect(function(err) {
@@ -193,10 +192,10 @@ function ConsultaValor(id_lectura,id_sensor, resultado) {
     
 
     var connection = mysql.createConnection({
-      host: 'emecdrive.com',
-      user: 'emecdriv',
-      password: 'oI32k6cw5Q',
-      database: 'emecdriv_emec'
+      host: 'home747756015.1and1-data.host',
+      user: 'u94379490',
+      password: 'Neurona.1',
+      database: 'db748943677'
     });
 
     connection.connect(function(err) {
