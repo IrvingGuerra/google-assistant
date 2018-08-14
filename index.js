@@ -6,10 +6,11 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const restService = express();
 const mysql = require('mysql');
-const HOST = "emecdrive.com";
-const USER = "emecdriv";
-const PASSWORD = "oI32k6cw5Q";
-const DATABASE = "emecdriv_emec";
+
+const HOST = "home747756015.1and1-data.host";
+const USER = "u94379490";
+const PASSWORD = "Neurona1";
+const DATABASE = "db748943677";
 
 restService.use(
   bodyParser.urlencoded({
