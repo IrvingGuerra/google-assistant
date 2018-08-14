@@ -169,15 +169,26 @@ function ConsultaLectura(id_estacion, resultado) {
     });
 
     connection.connect(function(err) {
-      if (err) throw err;
-      console.log("Connected!");
+      if (err){
+      	respuesta = "Error en la conexion";
+        return res.json({
+            fulfillmentText: respuesta,
+            source: "webhook-echo-sample"
+        });
+      }else{
+      	console.log("Connected!");
+      } throw err;
     });
 
     var returnValue = "Valor";
 
     connection.query("SELECT MAX(id) AS id FROM lectures WHERE station_id = "+id_estacion, function(error, result){
             if(error){
-               throw error;
+               respuesta = "Error en la consulta";
+		        return res.json({
+		            fulfillmentText: respuesta,
+		            source: "webhook-echo-sample"
+		        });
             }else{
               returnValue = result[0].id;
               resultado(returnValue);
@@ -201,8 +212,15 @@ function ConsultaValor(id_lectura,id_sensor, resultado) {
     });
 
     connection.connect(function(err) {
-      if (err) throw err;
+      if (err){
+      	respuesta = "Error en la conexion";
+        return res.json({
+            fulfillmentText: respuesta,
+            source: "webhook-echo-sample"
+        });
+      }else{
       console.log("Connected!");
+      }
     });
 
     var returnValue = "Valor";
@@ -211,7 +229,11 @@ function ConsultaValor(id_lectura,id_sensor, resultado) {
 
     connection.query(Sentencia, function(error, result){
             if(error){
-               throw error;
+               respuesta = "Error en la consulta";
+		        return res.json({
+		            fulfillmentText: respuesta,
+		            source: "webhook-echo-sample"
+		        });
             }else{
               returnValue = result[0].value;
               resultado(returnValue);
