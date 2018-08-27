@@ -110,18 +110,16 @@ restService.post("/echo", function(req, res) {
     var id_lectura = "";
     var valor_lectura = "";
 
-    respuesta = "estacion: "+idestacion+"sensor: "+idsensor;
-    return res.json({
-      fulfillmentText: respuesta,
-      source: "webhook-echo-sample"
-    });
-
-    /*
-
 
 
     ConsultaLectura(idestacion, function(result) {
         id_lectura = result;
+        respuesta = id_lectura;
+        return res.json({
+          fulfillmentText: respuesta,
+          source: "webhook-echo-sample"
+        });
+        /*
         if (id_lectura != null) {
           ConsultaValor(id_lectura,idsensor, function(result) {
             valor_lectura = result;
@@ -146,9 +144,13 @@ restService.post("/echo", function(req, res) {
               source: "webhook-echo-sample"
           });
         }
+
+        */
     });
 
-    */
+
+
+
   }
 });
 function ConsultaLectura(id_estacion, resultado) {
