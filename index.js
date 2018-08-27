@@ -34,21 +34,12 @@ restService.post("/echo", function(req, res) {
   var tipoValor = "";
 
   if (Sensores == "vacio" || Estacion == "vacio") {
-    respuesta = "Disculpe, necesito que indique el sensor y la estacion."
+    respuesta = "Disculpe, necesito que indique el sensor y la estacion.";
     return res.json({
       fulfillmentText: respuesta,
       source: "webhook-echo-sample"
     });
   }else{
-
-    respuesta = "Entra al codigo";
-    return res.json({
-        fulfillmentText: respuesta,
-        source: "webhook-echo-sample"
-    });
-
-    /*
-
   	switch(Sensores){
   		case "Temperatura Ambiente":
   			idsensor = "1";
@@ -112,6 +103,14 @@ restService.post("/echo", function(req, res) {
   			tipoValor = "milimetros";
   			break;
 	  }
+
+    respuesta = Sensores;
+    return res.json({
+      fulfillmentText: respuesta,
+      source: "webhook-echo-sample"
+    });
+
+    /*
   	var array = Estacion.split(" ");
   	idestacion = array[1];
 
