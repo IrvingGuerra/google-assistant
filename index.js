@@ -40,6 +40,15 @@ restService.post("/echo", function(req, res) {
       source: "webhook-echo-sample"
     });
   }else{
+
+    respuesta = "Entra al codigo";
+    return res.json({
+        fulfillmentText: respuesta,
+        source: "webhook-echo-sample"
+    });
+
+    /*
+
   	switch(Sensores){
   		case "Temperatura Ambiente":
   			idsensor = "1";
@@ -136,6 +145,8 @@ restService.post("/echo", function(req, res) {
           });
         }
     });
+
+    */
   }
 });
 function ConsultaLectura(id_estacion, resultado) {
