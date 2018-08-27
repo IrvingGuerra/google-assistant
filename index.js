@@ -1,28 +1,20 @@
-// Inicializacion de todo lo que se necesita para arrancar
-
 "use strict";
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const restService = express();
 const mysql = require('mysql');
-
 const HOST = "74.208.160.86";
 const USER = "root";
 const PASSWORD = "Hs1EE00b05";
 const DATABASE = "neurona_wireless";
-
 restService.use(
   bodyParser.urlencoded({
     extended: true
   })
 );
 restService.use(bodyParser.json());
-
 // Funcion que se llama desde DialogFlow
-
 restService.post("/echo", function(req, res) {
-
   var Sensores =
     req.body.queryResult &&
     req.body.queryResult.parameters &&
@@ -48,7 +40,6 @@ restService.post("/echo", function(req, res) {
       source: "webhook-echo-sample"
     });
   }else{
-  	//En esta parte se confirma que se enviaron los parametros correctos
   	switch(Sensores){
   		case "Temperatura Ambiente":
   			idsensor = "1";
@@ -76,7 +67,7 @@ restService.post("/echo", function(req, res) {
   			break;
   		case "Dirección de Viento":
   			idsensor = "7";
-  			tipoValor = "";
+  			tipoValor = "N";
   			break;
   		case "Humedad De Sustrato 1":
   			idsensor = "8";
@@ -114,21 +105,17 @@ restService.post("/echo", function(req, res) {
 	  }
   	var array = Estacion.split(" ");
   	idestacion = array[1];
+
     var id_lectura = "";
     var valor_lectura = "";
+
     ConsultaLectura(idestacion, function(result) {
-
         id_lectura = result;
-
         if (id_lectura != null) {
-
           ConsultaValor(id_lectura,idsensor, function(result) {
-
             valor_lectura = result;
-
             if (valor_lectura != null) {
               respuesta = Sensores + " en la " + Estacion + " es de "+ valor_lectura + " " + tipoValor +". ¿Necesitas algo más? ";
-
               return res.json({
                 fulfillmentText: respuesta,
                 source: "webhook-echo-sample"
@@ -140,9 +127,7 @@ restService.post("/echo", function(req, res) {
                   source: "webhook-echo-sample"
               });
             }
-
           });
-
         }else{
           respuesta = "Lo siento, no he encontrado esa información ¿Deseas que busque algo más?";
           return res.json({
