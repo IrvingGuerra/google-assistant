@@ -190,15 +190,15 @@ function ConsultaValor(id_lectura,id_sensor, resultado) {
       console.log("Connected!");
     });
     var returnValue = "Valor";
-    var Sentencia = "SELECT MAX(id) AS id,value FROM registers WHERE lecture_id = '"+id_lectura+"' AND sensor_id = '"+id_sensor+"'";
+    var Sentencia = "SELECT value FROM registers WHERE lecture_id = '"+id_lectura+"' AND sensor_id = '"+id_sensor+"'";
     connection.query(Sentencia, function(error, result){
-      if(error){
-         throw error;
-      }else{
-        returnValue = result[0].value;
-        resultado(returnValue);
+        if(error){
+           throw error;
+        }else{
+          returnValue = result[0].value;
+          resultado(returnValue);
+        }
       }
-    }
     );
     connection.end();
 }
