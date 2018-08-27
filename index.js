@@ -7,12 +7,10 @@ const bodyParser = require("body-parser");
 const restService = express();
 const mysql = require('mysql');
 
-const HOST = "db748943677.db.1and1.com";
-const PORT = "3306";
-const DATABASE = "db748943677";
-const USER = "dbo748943677";
-const PASSWORD = "Neurona.1";
-
+const HOST = "74.208.160.86";
+const USER = "root";
+const PASSWORD = "Hs1EE00b05";
+const DATABASE = "neurona_wireless";
 
 restService.use(
   bodyParser.urlencoded({
@@ -171,8 +169,7 @@ function ConsultaLectura(id_estacion, resultado) {
       host: HOST,
       user: USER,
       password: PASSWORD,
-      database: DATABASE,
-      port: PORT
+      database: DATABASE
     });
 
     connection.connect(function(err) {
@@ -202,8 +199,7 @@ function ConsultaValor(id_lectura,id_sensor, resultado) {
       host: HOST,
       user: USER,
       password: PASSWORD,
-      database: DATABASE,
-      port: PORT
+      database: DATABASE
     });
 
     connection.connect(function(err) {
