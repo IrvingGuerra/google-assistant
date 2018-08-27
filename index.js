@@ -43,6 +43,10 @@ restService.post("/echo", function(req, res) {
 
   if (Sensores == "vacio" || Estacion == "vacio") {
     respuesta = "Disculpe, necesito que indique el sensor y la estacion."
+    return res.json({
+      fulfillmentText: respuesta,
+      source: "webhook-echo-sample"
+    });
   }else{
   	//En esta parte se confirma que se enviaron los parametros correctos
   	switch(Sensores){
@@ -108,13 +112,10 @@ restService.post("/echo", function(req, res) {
   			tipoValor = "milimetros";
   			break;
 	  }
-
-	var array = Estacion.split(" ");
-	idestacion = array[1];
-
+  	var array = Estacion.split(" ");
+  	idestacion = array[1];
     var id_lectura = "";
     var valor_lectura = "";
-
     ConsultaLectura(idestacion, function(result) {
 
         id_lectura = result;
@@ -151,14 +152,7 @@ restService.post("/echo", function(req, res) {
         }
     });
   }
-  return res.json({
-    fulfillmentText: respuesta,
-    source: "webhook-echo-sample"
-  });
-
 });
-
-
 function ConsultaLectura(id_estacion, resultado) {
     var connection = mysql.createConnection({
       host: HOST,
@@ -182,7 +176,6 @@ function ConsultaLectura(id_estacion, resultado) {
     );
     connection.end();
 }
-
 function ConsultaValor(id_lectura,id_sensor, resultado) {
     var connection = mysql.createConnection({
       host: HOST,
@@ -207,7 +200,6 @@ function ConsultaValor(id_lectura,id_sensor, resultado) {
     );
     connection.end();
 }
-
 restService.listen(process.env.PORT || 8000, function() {
   console.log("Server up and listening");
 });
