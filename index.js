@@ -123,7 +123,6 @@ restService.post("/echo", function(req, res) {
               fulfillmentText: respuesta,
               source: "webhook-echo-sample"
             });
-            /*
             if (valor_lectura != null) {
               respuesta = Sensores + " en la " + Estacion + " es de "+ valor_lectura + " " + tipoValor +". ¿Necesitas algo más? ";
               return res.json({
@@ -137,7 +136,6 @@ restService.post("/echo", function(req, res) {
                   source: "webhook-echo-sample"
               });
             }
-            */
           });
         }else{
           respuesta = "Lo siento, no he encontrado esa información ¿Deseas que busque algo más?";
@@ -189,7 +187,7 @@ function ConsultaValor(id_lectura,id_sensor, resultado) {
       console.log("Connected!");
     });
     var returnValue = "Valor";
-    var Sentencia = "SELECT value FROM registers WHERE lecture_id = '"+id_lectura+"' AND sensor_id = '"+id_sensor+"'";
+    var Sentencia = "SELECT MAX(id) AS id,value FROM registers WHERE lecture_id = '"+id_lectura+"' AND sensor_id = '"+id_sensor+"'";
     connection.query(Sentencia, function(error, result){
         if(error){
            throw error;
