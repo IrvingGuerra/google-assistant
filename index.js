@@ -151,6 +151,11 @@ restService.post("/echo", function(req, res) {
         }
     });
   }
+  return res.json({
+    fulfillmentText: respuesta,
+    source: "webhook-echo-sample"
+  });
+
 });
 
 
