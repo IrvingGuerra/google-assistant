@@ -104,18 +104,21 @@ restService.post("/echo", function(req, res) {
   			break;
 	  }
 
-    respuesta = Sensores;
+  	var array = Estacion.split(" ");
+  	idestacion = array[1];
+
+    var id_lectura = "";
+    var valor_lectura = "";
+
+    respuesta = "estacion: "+idestacion+"sensor: "+idsensor;
     return res.json({
       fulfillmentText: respuesta,
       source: "webhook-echo-sample"
     });
 
     /*
-  	var array = Estacion.split(" ");
-  	idestacion = array[1];
 
-    var id_lectura = "";
-    var valor_lectura = "";
+
 
     ConsultaLectura(idestacion, function(result) {
         id_lectura = result;
