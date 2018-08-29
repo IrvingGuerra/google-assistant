@@ -112,7 +112,6 @@ restService.post("/echo", function(req, res) {
             fulfillmentText: respuesta,
             source: "webhook-echo-sample"
         });
-/*
         if (id_lectura != null) {
           ConsultaValor(id_lectura,id_sensor, function(result) {
             if (valor_lectura != null) {
@@ -137,7 +136,6 @@ restService.post("/echo", function(req, res) {
               source: "webhook-echo-sample"
           });
         }
-*/
     });
 
 
