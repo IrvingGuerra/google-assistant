@@ -29,7 +29,7 @@ restService.post("/echo", function(req, res) {
       : "vacio";
 
   var respuesta = "";
-  var idsensor = "";
+  var id_sensor = "";
   var idestacion = "";
   var tipoValor = "";
 
@@ -42,59 +42,59 @@ restService.post("/echo", function(req, res) {
   }else{
   	switch(Sensores){
   		case "Temperatura Ambiente":
-  			idsensor = "1";
+  			id_sensor = "1";
   			tipoValor = "grados centigrados";
   			break;
   		case "Humedad Ambiente":
-  			idsensor = "2";
+  			id_sensor = "2";
   			tipoValor = "por ciento";
   			break;
   		case "Radiación UV":
-  			idsensor = "3";
+  			id_sensor = "3";
   			tipoValor = "radiacion ultra violeta";
   			break;
   		case "Luminosidad LUX":
-  			idsensor = "4";
+  			id_sensor = "4";
   			tipoValor = "lux";
   			break;
   		case "Dióxido de Carbono":
-  			idsensor = "5";
+  			id_sensor = "5";
   			tipoValor = "partes por millon";
   			break;
   		case "Flujo de Agua":
-  			idsensor = "6";
+  			id_sensor = "6";
   			tipoValor = "litros";
   			break;
   		case "Dirección de Viento":
-  			idsensor = "7";
+  			id_sensor = "7";
   			tipoValor = "N";
   			break;
   		case "Humedad De Sustrato":
-  			idsensor = "8";
+  			id_sensor = "8";
   			tipoValor = "pascales";
   			break;
   		case "Temperatura Sustrato":
-  			idsensor = "11";
+  			id_sensor = "11";
   			tipoValor = "grados centigrados";
   			break;
   		case "Contenido Volumétrico de Agua":
-  			idsensor = "9";
+  			id_sensor = "9";
   			tipoValor = "por ciento";
   			break;
   		case "Conductividad Eléctrica":
-  			idsensor = "10";
+  			id_sensor = "10";
   			tipoValor = "siemens centímetros";
   			break;
   		case "Voltage Estación Solar":
-  			idsensor = "12";
+  			id_sensor = "12";
   			tipoValor = "volts";
   			break;
   		case "Velocidad De Viento":
-  			idsensor = "13";
+  			id_sensor = "13";
   			tipoValor = "kilometros por hora";
   			break;
   		case "Pluviómetro":
-  			idsensor = "14";
+  			id_sensor = "14";
   			tipoValor = "milimetros";
   			break;
 	  }
@@ -107,14 +107,14 @@ restService.post("/echo", function(req, res) {
 
     ConsultaLectura(idestacion, function(result) {
         id_lectura = result;
-        respuesta = id_lectura + "sensor: "id_sensor;
+        respuesta = id_lectura + "sensor: "+ id_sensor;
         return res.json({
             fulfillmentText: respuesta,
             source: "webhook-echo-sample"
         });
 /*
         if (id_lectura != null) {
-          ConsultaValor(id_lectura,idsensor, function(result) {
+          ConsultaValor(id_lectura,id_sensor, function(result) {
             if (valor_lectura != null) {
               respuesta = Sensores + " en la " + Estacion + " es de "+ valor_lectura + " " + tipoValor +". ¿Necesitas algo más? ";
               return res.json({
