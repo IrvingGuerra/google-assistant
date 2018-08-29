@@ -107,7 +107,7 @@ restService.post("/echo", function(req, res) {
 
     ConsultaLectura(idestacion, function(result) {
         id_lectura = result;
-        respuesta = id_lectura;
+        respuesta = id_lectura + "sensor: "id_sensor;
         return res.json({
             fulfillmentText: respuesta,
             source: "webhook-echo-sample"
@@ -180,7 +180,7 @@ function ConsultaValor(id_lectura,id_sensor, resultado) {
       console.log("Connected!");
     });
     var returnValue = "Valor";
-    var Sentencia = "SELECT MAX(id) AS id,value FROM registers WHERE lecture_id = '"+id_lectura+"' AND sensor_id = '"+id_sensor+"'";
+    var Sentencia = "SELECT value FROM registers WHERE lecture_id = '"+id_lectura+"' AND sensor_id = '"+id_sensor+"'";
     connection.query(Sentencia, function(error, result){
         if(error){
            throw error;
