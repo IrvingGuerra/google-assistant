@@ -107,11 +107,6 @@ restService.post("/echo", function(req, res) {
 
     ConsultaLectura(idestacion, function(result) {
         id_lectura = result;
-        respuesta = id_lectura + "sensor: "+ id_sensor;
-        return res.json({
-            fulfillmentText: respuesta,
-            source: "webhook-echo-sample"
-        });
         if (id_lectura != null) {
           ConsultaValor(id_lectura,id_sensor, function(result) {
             valor_lectura = result;
