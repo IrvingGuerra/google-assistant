@@ -114,6 +114,7 @@ restService.post("/echo", function(req, res) {
         });
         if (id_lectura != null) {
           ConsultaValor(id_lectura,id_sensor, function(result) {
+            valor_lectura = result;
             if (valor_lectura != null) {
               respuesta = Sensores + " en la " + Estacion + " es de "+ valor_lectura + " " + tipoValor +". ¿Necesitas algo más? ";
               return res.json({
