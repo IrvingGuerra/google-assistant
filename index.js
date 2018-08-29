@@ -105,10 +105,14 @@ restService.post("/echo", function(req, res) {
     var id_lectura = "";
     var valor_lectura = "";
 
-
-
     ConsultaLectura(idestacion, function(result) {
         id_lectura = result;
+        respuesta = id_lectura;
+        return res.json({
+            fulfillmentText: respuesta,
+            source: "webhook-echo-sample"
+        });
+/*
         if (id_lectura != null) {
           ConsultaValor(id_lectura,idsensor, function(result) {
             if (valor_lectura != null) {
@@ -125,6 +129,7 @@ restService.post("/echo", function(req, res) {
               });
             }
           });
+*/
         }else{
           respuesta = "Lo siento, no he encontrado esa información ¿Deseas que busque algo más?";
           return res.json({
