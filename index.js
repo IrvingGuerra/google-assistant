@@ -61,19 +61,19 @@ restService.post("/echo", function(req, res) {
   			id_sensor = "5";
   			tipoValor = "partes por millon";
   			break;
-  		case "Contenido Volumétrico de Agua": //****No Contesta
+  		case "Contenido Volumétrico de Agua": 
   			id_sensor = "6";
-  			tipoValor = "litros";
+  			tipoValor = "por ciento";
   			break;
   		case "Conductividad Eléctrica":
   			id_sensor = "7";
   			tipoValor = "miliSiemes entre centimetro";
   			break;
-  		case "Temperatura Sustrato": //****No Contesta
+  		case "Temperatura Sustrato":
   			id_sensor = "8";
   			tipoValor = "pascales";
   			break;
-  		case "Drenaje": //****No Contesta
+  		case "Drenaje":
   			id_sensor = "9";
   			tipoValor = "por ciento";
   			break;
@@ -85,7 +85,7 @@ restService.post("/echo", function(req, res) {
         id_sensor = "11";
         tipoValor = "kilometros por hora";
         break;
-  		case "Dirección de Viento": //****Que entrega? 
+  		case "Dirección de Viento":
   			id_sensor = "12";
   			tipoValor = "N/S/E/O";
   			break;
@@ -93,7 +93,7 @@ restService.post("/echo", function(req, res) {
   			id_sensor = "13";
   			tipoValor = "milimetros";
   			break;
-  		case "Voltage Estación Solar":
+  		case "Voltaje Estación Solar":
   			id_sensor = "14";
   			tipoValor = "volts";
   			break;
