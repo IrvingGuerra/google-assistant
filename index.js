@@ -51,51 +51,51 @@ restService.post("/echo", function(req, res) {
   			break;
   		case "Luminosidad LUX":
   			id_sensor = "3";
-  			tipoValor = "radiacion ultra violeta";
+  			tipoValor = "Kiloluxes";
   			break;
   		case "Radiación UV":
   			id_sensor = "4";
-  			tipoValor = "lux";
+  			tipoValor = "radiación ultravioleta";
   			break;
   		case "Dióxido de Carbono":
   			id_sensor = "5";
   			tipoValor = "partes por millon";
   			break;
-  		case "Contenido Volumétrico de Agua":
+  		case "Contenido Volumétrico de Agua": //****No Contesta
   			id_sensor = "6";
   			tipoValor = "litros";
   			break;
   		case "Conductividad Eléctrica":
   			id_sensor = "7";
-  			tipoValor = "N";
+  			tipoValor = "miliSiemes entre centimetro";
   			break;
-  		case "Temperatura Sustrato":
+  		case "Temperatura Sustrato": //****No Contesta
   			id_sensor = "8";
   			tipoValor = "pascales";
   			break;
-  		case "Drenaje":
+  		case "Drenaje": //****No Contesta
   			id_sensor = "9";
   			tipoValor = "por ciento";
   			break;
   		case "Flujo de Agua":
   			id_sensor = "10";
-  			tipoValor = "siemens centímetros";
+  			tipoValor = "litros";
   			break;
       case "Velocidad De Viento":
         id_sensor = "11";
         tipoValor = "kilometros por hora";
         break;
-  		case "Dirección de Viento":
+  		case "Dirección de Viento": //****Que entrega? 
   			id_sensor = "12";
-  			tipoValor = "volts";
+  			tipoValor = "N/S/E/O";
   			break;
   		case "Pluviómetro":
   			id_sensor = "13";
-  			tipoValor = "kilometros por hora";
+  			tipoValor = "milimetros";
   			break;
   		case "Voltage Estación Solar":
   			id_sensor = "14";
-  			tipoValor = "milimetros";
+  			tipoValor = "volts";
   			break;
 	  }
 
