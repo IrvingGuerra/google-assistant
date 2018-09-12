@@ -133,12 +133,9 @@ restService.post("/echo", function(req, res) {
           });
         }
     });
-
-
-
-
   }
 });
+
 function ConsultaLectura(id_estacion, resultado) {
     var connection = mysql.createConnection({
       host: HOST,
@@ -162,6 +159,7 @@ function ConsultaLectura(id_estacion, resultado) {
     );
     connection.end();
 }
+
 function ConsultaValor(id_lectura,id_sensor, resultado) {
     var connection = mysql.createConnection({
       host: HOST,
@@ -186,6 +184,7 @@ function ConsultaValor(id_lectura,id_sensor, resultado) {
     );
     connection.end();
 }
+
 restService.listen(process.env.PORT || 8000, function() {
   console.log("Server up and listening");
 });
