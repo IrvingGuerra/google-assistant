@@ -150,7 +150,8 @@ function ConsultaLectura(id_estacion, resultado) {
     var returnValue = "Valor";
     connection.query("SELECT MAX(id) AS id FROM lectures WHERE station_id = "+id_estacion, function(error, result){
       if(error){
-         throw error;
+        returnValue = null;
+        resultado(returnValue);
       }else{
         returnValue = result[0].id;
         resultado(returnValue);
@@ -175,7 +176,8 @@ function ConsultaValor(id_lectura,id_sensor, resultado) {
     var Sentencia = "SELECT value FROM registers WHERE lecture_id = '"+id_lectura+"' AND sensor_id = '"+id_sensor+"'";
     connection.query(Sentencia, function(error, result){
         if(error){
-           throw error;
+          returnValue = null;
+          resultado(returnValue);
         }else{
           returnValue = result[0].value;
           resultado(returnValue);
