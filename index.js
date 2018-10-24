@@ -59,6 +59,8 @@ restService.post("/echo", function(req, res) {
     }
   });
 
+  /*
+
   if (Sensores == "vacio" || Estacion == "vacio") {
     respuesta = "Disculpe, necesito que indique el sensor y la estacion.";
     return res.json({
@@ -160,6 +162,8 @@ restService.post("/echo", function(req, res) {
         }
     });
   }
+
+  */
 
 });
 
