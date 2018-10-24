@@ -42,25 +42,6 @@ restService.post("/echo", function(req, res) {
 
   //var contador = req.data.count = 1;
 
-  ConsultaEmail(email, function(result) {
-    idUsuario = result;
-    if (idUsuario != null) {
-      respuesta = email + "con id "+idUsuario;
-      return res.json({
-        fulfillmentText: respuesta,
-        source: "webhook-echo-sample"
-      });
-    }else{
-      respuesta = "Lo siento, usted no pertenece a nuestro sistema";
-      return res.json({
-          fulfillmentText: respuesta,
-          source: "webhook-echo-sample"
-      });
-    }
-  });
-
-  /*
-
   if (Sensores == "vacio" || Estacion == "vacio") {
     respuesta = "Disculpe, necesito que indique el sensor y la estacion.";
     return res.json({
@@ -162,8 +143,6 @@ restService.post("/echo", function(req, res) {
         }
     });
   }
-
-  */
 
 });
 
