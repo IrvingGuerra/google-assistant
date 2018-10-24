@@ -42,13 +42,34 @@ restService.post("/echo", function(req, res) {
 
   //var contador = req.data.count = 1;
 
-  if (Sensores == "vacio" || Estacion == "vacio") {
+  if (Sensores == "vacio" || Estacion == "vacio" || email == "vacio" ) {
     respuesta = "Disculpe, necesito que indique el sensor y la estacion.";
     return res.json({
       fulfillmentText: respuesta,
       source: "webhook-echo-sample"
     });
   }else{
+
+    //Antes de todo haremos verificacion de email
+    ConsultaEmail(email, function(result) {
+      idUsuario = result;
+      if (idUsuario != null) {
+        respuesta = email + "con id "+idUsuario;
+        return res.json({
+          fulfillmentText: respuesta,
+          source: "webhook-echo-sample"
+        });
+      }else{
+        respuesta = "Lo siento, usted no pertenece a nuestro sistema";
+        return res.json({
+            fulfillmentText: respuesta,
+            source: "webhook-echo-sample"
+        });
+      }
+    });
+
+
+/*
   	switch(Sensores){
   		case "Temperatura Ambiente":
   			id_sensor = "1";
@@ -142,6 +163,9 @@ restService.post("/echo", function(req, res) {
           });
         }
     });
+
+
+    */
   }
 
 });
