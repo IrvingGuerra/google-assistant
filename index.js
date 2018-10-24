@@ -38,12 +38,14 @@ restService.post("/echo", function(req, res) {
   var id_sensor = "";
   var idestacion = "";
   var tipoValor = "";
+  var idUsuario = "";
 
   //var contador = req.data.count = 1;
 
   ConsultaEmail(email, function(result) {
-    if (result != null) {
-      respuesta = email + "con id "+result;
+    idUsuario = result;
+    if (idUsuario != null) {
+      respuesta = email + "con id "+idUsuario;
       return res.json({
         fulfillmentText: respuesta,
         source: "webhook-echo-sample"
