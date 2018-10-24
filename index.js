@@ -44,7 +44,7 @@ restService.post("/echo", function(req, res) {
   //Antes de todo, se consultara el email
 
   ConsultaEmail(email, function(result) {
-    if (result != null) {
+    if (result != null || result != "NoEmail") {
       //result contiene el id del usuario
       respuesta = "Tienes el id = "+result;
       return res.json({
@@ -59,7 +59,7 @@ restService.post("/echo", function(req, res) {
       });
     }
   });
-
+/*
 
   if (Sensores == "vacio" || Estacion == "vacio") {
     respuesta = "Disculpe, necesito que indique el sensor y la estacion.";
@@ -163,6 +163,8 @@ restService.post("/echo", function(req, res) {
     });
   }
 
+*/
+
 
 });
 
@@ -235,7 +237,7 @@ function ConsultaEmail(email) {
           returnValue = null;
           resultado(returnValue);
         }else{
-          returnValue = result[0].value;
+          returnValue = result[0].id;
           resultado(returnValue);
         }
       }
