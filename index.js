@@ -41,26 +41,6 @@ restService.post("/echo", function(req, res) {
 
   //var contador = req.data.count = 1;
 
-  //Antes de todo, se consultara el email
-
-  ConsultaEmail(email, function(result) {
-    if (result != null || result != "NoEmail") {
-      //result contiene el id del usuario
-      respuesta = "Tienes el id = "+result;
-      return res.json({
-        fulfillmentText: respuesta,
-        source: "webhook-echo-sample"
-      });
-    }else{
-      respuesta = "Lo siento, no estas en registrado en nuestro sistema";
-      return res.json({
-          fulfillmentText: respuesta,
-          source: "webhook-echo-sample"
-      });
-    }
-  });
-/*
-
   if (Sensores == "vacio" || Estacion == "vacio") {
     respuesta = "Disculpe, necesito que indique el sensor y la estacion.";
     return res.json({
@@ -162,8 +142,6 @@ restService.post("/echo", function(req, res) {
         }
     });
   }
-
-*/
 
 
 });
