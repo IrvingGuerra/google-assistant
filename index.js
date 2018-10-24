@@ -39,6 +39,7 @@ restService.post("/echo", function(req, res) {
   var idestacion = "";
   var tipoValor = "";
   var idUsuario = "";
+  var idNeurona = "";
 
   //var contador = req.data.count = 1;
 
@@ -54,10 +55,22 @@ restService.post("/echo", function(req, res) {
     ConsultaEmail(email, function(result) {
       idUsuario = result;
       if (idUsuario != null) {
-        respuesta = email + "con id test "+idUsuario;
-        return res.json({
-          fulfillmentText: respuesta,
-          source: "webhook-echo-sample"
+
+        ConsultaNeurona(idUsuario,Estacion, function(result) {
+          idNeurona = result;
+          if (idNeurona != null) {
+            respuesta = email + "con id test "+idUsuario+"Tienes acceso a "+Estacion+"Con id: "+idNeurona;
+            return res.json({
+              fulfillmentText: respuesta,
+              source: "webhook-echo-sample"
+            });
+          }else{
+            respuesta = "Lo siento, no tienes permitido acceder a la: "+Estacion;
+            return res.json({
+                fulfillmentText: respuesta,
+                source: "webhook-echo-sample"
+            });
+          }
         });
       }else{
         respuesta = "Lo siento, usted no pertenece a nuestro sistema";
@@ -234,6 +247,32 @@ function ConsultaEmail(email, resultado) {
     });
     var returnValue = "Valor";
     var Sentencia = "SELECT id FROM users WHERE email = '"+email+"'";
+    connection.query(Sentencia, function(error, result){
+        if(error){
+          returnValue = null;
+          resultado(returnValue);
+        }else{
+          returnValue = result[0].id;
+          resultado(returnValue);
+        }
+      }
+    );
+    connection.end();
+}
+
+function ConsultaNeurona(idUsuario, Estacion, resultado) {
+    var connection = mysql.createConnection({
+      host: HOST,
+      user: USER,
+      password: PASSWORD,
+      database: DATABASE
+    });
+    connection.connect(function(err) {
+      if (err) throw err;
+      console.log("Connected!");
+    });
+    var returnValue = "Valor";
+    var Sentencia = "SELECT id FROM stations WHERE name = '"+Estacion+"' AND user_id = '"+idUsuario+"'";
     connection.query(Sentencia, function(error, result){
         if(error){
           returnValue = null;
