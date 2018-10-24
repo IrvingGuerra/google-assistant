@@ -212,7 +212,7 @@ function ConsultaValor(id_lectura,id_sensor, resultado) {
     connection.end();
 }
 
-function ConsultaEmail(email) {
+function ConsultaEmail(email, resultado) {
     var connection = mysql.createConnection({
       host: HOST,
       user: USER,
