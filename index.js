@@ -27,11 +27,39 @@ restService.post("/echo", function(req, res) {
     req.body.queryResult.parameters.Estacion
       ? req.body.queryResult.parameters.Estacion
       : "vacio";
+  var email =
+    req.body.queryResult &&
+    req.body.queryResult.parameters &&
+    req.body.queryResult.parameters.email
+      ? req.body.queryResult.parameters.email
+      : "vacio";
 
   var respuesta = "";
   var id_sensor = "";
   var idestacion = "";
   var tipoValor = "";
+
+  //var contador = req.data.count = 1;
+
+  //Antes de todo, se consultara el email
+
+  ConsultaEmail(email, function(result) {
+    if (result != null) {
+      //result contiene el id del usuario
+      respuesta = "Tienes el id = "+result;
+      return res.json({
+        fulfillmentText: respuesta,
+        source: "webhook-echo-sample"
+      });
+    }else{
+      respuesta = "Lo siento, no estas en registrado en nuestro sistema";
+      return res.json({
+          fulfillmentText: respuesta,
+          source: "webhook-echo-sample"
+      });
+    }
+  });
+
 
   if (Sensores == "vacio" || Estacion == "vacio") {
     respuesta = "Disculpe, necesito que indique el sensor y la estacion.";
@@ -134,6 +162,8 @@ restService.post("/echo", function(req, res) {
         }
     });
   }
+
+
 });
 
 function ConsultaLectura(id_estacion, resultado) {
@@ -174,6 +204,32 @@ function ConsultaValor(id_lectura,id_sensor, resultado) {
     });
     var returnValue = "Valor";
     var Sentencia = "SELECT value FROM registers WHERE lecture_id = '"+id_lectura+"' AND sensor_id = '"+id_sensor+"'";
+    connection.query(Sentencia, function(error, result){
+        if(error){
+          returnValue = null;
+          resultado(returnValue);
+        }else{
+          returnValue = result[0].value;
+          resultado(returnValue);
+        }
+      }
+    );
+    connection.end();
+}
+
+function ConsultaEmail(email) {
+    var connection = mysql.createConnection({
+      host: HOST,
+      user: USER,
+      password: PASSWORD,
+      database: DATABASE
+    });
+    connection.connect(function(err) {
+      if (err) throw err;
+      console.log("Connected!");
+    });
+    var returnValue = "NoEmail";
+    var Sentencia = "SELECT id FROM users WHERE email = '"+email+"'";
     connection.query(Sentencia, function(error, result){
         if(error){
           returnValue = null;
