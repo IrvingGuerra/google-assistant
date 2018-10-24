@@ -41,6 +41,22 @@ restService.post("/echo", function(req, res) {
 
   //var contador = req.data.count = 1;
 
+  ConsultaEmail(email, function(result) {
+    if (result != null) {
+      respuesta = email + "con id "+result;
+      return res.json({
+        fulfillmentText: respuesta,
+        source: "webhook-echo-sample"
+      });
+    }else{
+      respuesta = "Lo siento, usted no pertenece a nuestro sistema";
+      return res.json({
+          fulfillmentText: respuesta,
+          source: "webhook-echo-sample"
+      });
+    }
+  });
+
   if (Sensores == "vacio" || Estacion == "vacio") {
     respuesta = "Disculpe, necesito que indique el sensor y la estacion.";
     return res.json({
@@ -119,7 +135,7 @@ restService.post("/echo", function(req, res) {
           ConsultaValor(id_lectura,id_sensor, function(result) {
             valor_lectura = result;
             if (valor_lectura != null) {
-              respuesta = email+" "+Sensores + " en la " + Estacion + " es de "+ valor_lectura + " " + tipoValor +". ¿Necesitas algo más? ";
+              respuesta = Sensores + " en la " + Estacion + " es de "+ valor_lectura + " " + tipoValor +". ¿Necesitas algo más? ";
               return res.json({
                 fulfillmentText: respuesta,
                 source: "webhook-echo-sample"
@@ -207,7 +223,7 @@ function ConsultaEmail(email) {
       if (err) throw err;
       console.log("Connected!");
     });
-    var returnValue = "NoEmail";
+    var returnValue = "Valor";
     var Sentencia = "SELECT id FROM users WHERE email = '"+email+"'";
     connection.query(Sentencia, function(error, result){
         if(error){
